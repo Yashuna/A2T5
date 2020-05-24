@@ -1,0 +1,25 @@
+#To obtain bar graph 
+text <- " 
++ country, percentage 
++ South Korea, 32% 
++ China, 88% 
++ Italy, 97% 
++ Japan, 42% 
++ Romania, 55% 
++ USA, 98% 
++ Spain, 76% 
++ Germany, 68% 
++ Philippines, 22%" 
+> df<-read.table(textConnection(text), sep=",", header = T, stringsAsFactors = F) df <- arrange(df, percentage) > df$country <- factor(df$country, levels = df$country) > ggplot(df, aes(country,percentage,fill=country)) + geom_col()+ scale_fill_brewer(palette="Spe ctral") + ggtitle(label = "Aged 80 above fatality rate in nine countries") 
+ 
+#To obtain Kernel Density Plot 
+
+data <- data.frame(percentage <- c(32, 88, 97, 42, 55, 98, 76, 68, 22), country <- c("South Korea", "China", "Italy", "South Korea", "South Korea", "Italy", "China", "China", "Italy"), age <- c(10, 20, 30, 40, 50, 60, 70, 80, 90)) 
+> s <- ggplot(data, aes(x = percentage, fill = country)) + geom_density(alpha = 0.4)+ labs(title = "Aged 80 above fatality rate due to COVID-19") 
+> s
+ 
+ 
+#To obtain legend layout 
+
+s <- s + guides(fill = guide_legend(ncol = 2, byrow = TRUE)) 
+> s
